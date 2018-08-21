@@ -1,6 +1,8 @@
 package com.example.Server.rest;
 
+import com.example.Server.Facade.WebRestFacade;
 import com.example.Server.dto.PersonDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -11,13 +13,15 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class WebRestController {
 
-    @GetMapping(value="/hi")
-    public String testMapping(){
-        return "Hello world";
+    private final WebRestFacade webRestFacade;
+
+    @Autowired
+    public WebRestController(WebRestFacade webRestFacade){
+        this.webRestFacade = webRestFacade;
     }
 
     @PostMapping(value="/calculate")
     public boolean seeIfPersonFits(@RequestBody PersonDTO personDTO){
-        return true;
+        return webRestFacade.calculate(personDTO);
     }
 }
