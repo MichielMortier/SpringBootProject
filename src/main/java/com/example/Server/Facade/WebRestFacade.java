@@ -60,6 +60,7 @@ public class WebRestFacade {
                     mapper.reader(type).with(bootstrapSchema).readValues(file);
             return readValues.readAll();
         } catch (Exception e) {
+            System.err.println(e.getStackTrace().toString());
             return Collections.emptyList();
         }
     }
