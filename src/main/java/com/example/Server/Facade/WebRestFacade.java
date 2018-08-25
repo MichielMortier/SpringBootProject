@@ -5,6 +5,7 @@ import com.example.Server.dto.PersonDTO;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import com.sendgrid.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
@@ -16,10 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.io.File;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -97,7 +95,7 @@ public class WebRestFacade {
     private void sendSimpleMessage(
             String to, String subject, String text) {
         //SimpleMailMessage message = new SimpleMailMessage();
-        MimeMessage mimeMessage = emailSender.createMimeMessage();
+        /*MimeMessage mimeMessage = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
         try {
             helper.setTo(to);
@@ -117,5 +115,21 @@ public class WebRestFacade {
         System.out.println("MESSAGE IS KLAAR GEZET NU VERZENDEN");
         //emailSender.send(message);
         System.out.println("MESSAGE IS VERZONDEN");
+        Email from = new Email("michiel.mortier@gmail.com");
+        Email too = new Email("mortier.michiel@hotmail.com");
+        Content content = new Content("text/plain", text);
+        Mail mail = new Mail(from, subject, too, content);
+        SendGrid sg = new SendGrid(System.getenv("API_KEY"));
+        Request request = new Request();
+        try {
+            request.setMethod(Method.POST);
+            request.setEndpoint("mail/send");
+            request.setBody(mail.build());
+            Response response = sg.api(request);
+            System.out.println(response.getStatusCode());
+            System.out.println(response.getBody());
+            System.out.println(response.getHeaders());
+        } catch (IOException ex) {
+        }
     }
 }
