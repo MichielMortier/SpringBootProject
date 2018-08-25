@@ -9,9 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMailMessage;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -92,12 +96,26 @@ public class WebRestFacade {
 
     private void sendSimpleMessage(
             String to, String subject, String text) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
+        //SimpleMailMessage message = new SimpleMailMessage();
+        MimeMessage mimeMessage = emailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
+        try {
+            helper.setTo(to);
+            helper.setText(text);
+            helper.setSubject(subject);
+            emailSender.send(mimeMessage);
+        } catch (MessagingException e) {
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            System.out.println("********** FOUT"+sw.toString());
+
+        }
+
+        /*message.setTo(to);
         message.setSubject(subject);
-        message.setText(text);
+        message.setText(text);*/
         System.out.println("MESSAGE IS KLAAR GEZET NU VERZENDEN");
-        emailSender.send(message);
+        //emailSender.send(message);
         System.out.println("MESSAGE IS VERZONDEN");
     }
 }
