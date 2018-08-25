@@ -119,7 +119,7 @@ public class WebRestFacade {
         Email too = new Email("mortier.michiel@hotmail.com");
         Content content = new Content("text/plain", text);
         Mail mail = new Mail(from, subject, too, content);
-        SendGrid sg = new SendGrid("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"));
+        SendGrid sg = new SendGrid(System.getenv("API_KEY"));
         Request request = new Request();
         try {
             request.setMethod(Method.POST);
