@@ -59,13 +59,12 @@ public class WebRestFacade {
             CsvSchema bootstrapSchema = CsvSchema.emptySchema().withHeader().withColumnSeparator(';');
             char c = bootstrapSchema.getColumnSeparator();
             CsvMapper mapper = new CsvMapper();
-            File file = new ClassPathResource(fileName).getFile();
-            MappingIterator<T> readValues =
+            new ClassPathResource(fileName).getInputStream();
+            /*MappingIterator<T> readValues =
                     mapper.reader(type).with(bootstrapSchema).readValues(file);
+            List<T> lijst = readValues.readAll();*/
             System.out.println("geen fout opgetreden");
-            List<T> lijst = readValues.readAll();
-            System.out.println("geen fout opgetreden");
-            return lijst;
+            return Collections.emptyList();//lijst;
         } catch (Exception e) {
             System.out.println("fout opgetreden!");
             StringWriter sw = new StringWriter();
