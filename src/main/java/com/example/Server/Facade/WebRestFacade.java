@@ -51,8 +51,6 @@ public class WebRestFacade {
                     personDTO.setGender(csvPersoonDTO.getGender());
                     return personDTO;
                 }).collect(Collectors.toList());
-        System.out.print("DIT ZIJN DE PERSONEN");
-        System.out.println(personDTOS);
     }
 
     public <T> List<T> loadObjectList(Class<T> type, String fileName) {
@@ -63,15 +61,8 @@ public class WebRestFacade {
             InputStream file = new ClassPathResource(fileName).getInputStream();
             MappingIterator<T> readValues =
                     mapper.reader(type).with(bootstrapSchema).readValues(file);
-            System.out.println("geen fout opgetreden");
-            List<T> lijst = readValues.readAll();
-            System.out.println("geen fout opgetreden");
-            return lijst;
+            return readValues.readAll();
         } catch (Exception e) {
-            System.out.println("fout opgetreden!");
-            StringWriter sw = new StringWriter();
-            e.printStackTrace(new PrintWriter(sw));
-            System.err.println(sw.toString());
             return Collections.emptyList();
         }
     }
@@ -88,14 +79,14 @@ public class WebRestFacade {
                         .filter(personDTO1 -> (personDTO1.getBmi()-personDTO.getBmi()) <= 2)
                         .filter(personDTO1 -> Math.abs(Period.between(geboortedatum, LocalDate.parse(personDTO1.getBirthDay(), formatter2)).getYears()) < range)
                         .collect(Collectors.toList());
-        if(result.size() > 0){
+        /*if(result.size() > 0){
             StringBuilder tekst = new StringBuilder(BODY + personDTO.toString() + "\n\nDeze gegevens zouden kunnen overeenkomen met volgende patiënt(en) : \n");
             for(PersonDTO personDTO1 : result){
                 tekst.append(personDTO1.toString()).append("\n");
             }
             tekst.append("\nMet vriendelijke groeten \nMichiel Mortier");
             sendSimpleMessage(EMAIL,HEADER, tekst.toString());
-        }
+        }*/
         return result.size() > 0;
     }
 
