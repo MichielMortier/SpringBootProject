@@ -115,6 +115,7 @@ public class WebRestFacade {
         System.out.println("MESSAGE IS KLAAR GEZET NU VERZENDEN");
         //emailSender.send(message);
         System.out.println("MESSAGE IS VERZONDEN");
+        System.out.println("KEY " + System.getenv("API_KEY"));
         Email from = new Email("michiel.mortier@gmail.com");
         Email too = new Email("mortier.michiel@hotmail.com");
         Content content = new Content("text/plain", text);
