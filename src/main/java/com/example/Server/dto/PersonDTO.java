@@ -26,4 +26,21 @@ public class PersonDTO {
 
     private double length;
 
+    private double bmi;
+
+    public String toString(){
+        String out = "";
+        if(name != null){
+            out += "Naam : " + name;
+            out += "\nVoornaam : " + preName;
+            out += "\nEmail : " + email;
+            out += "\nGewicht : " + weight;
+            out += "\nLengte : " + length;
+        }
+        out += "\nBMI : " +  Math.round(bmi * 100.0) / 100.0;
+        out += "\nGeslacht : " + gender;
+        out += "\nGeboortedatum : " + birthDay;
+        return out;
+    }
+
 }

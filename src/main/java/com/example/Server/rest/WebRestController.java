@@ -5,6 +5,8 @@ import com.example.Server.dto.PersonDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+
 /**
  * Created by Michiel
  */
@@ -21,7 +23,7 @@ public class WebRestController {
     }
 
     @PostMapping(value="/calculate")
-    public boolean seeIfPersonFits(@RequestBody PersonDTO personDTO){
+    public boolean seeIfPersonFits(@RequestBody PersonDTO personDTO) throws ParseException {
         return webRestFacade.calculate(personDTO);
     }
 }
