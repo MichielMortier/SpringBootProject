@@ -79,14 +79,14 @@ public class WebRestFacade {
                         .filter(personDTO1 -> (personDTO1.getBmi()-personDTO.getBmi()) <= 2)
                         .filter(personDTO1 -> Math.abs(Period.between(geboortedatum, LocalDate.parse(personDTO1.getBirthDay(), formatter2)).getYears()) < range)
                         .collect(Collectors.toList());
-        /*if(result.size() > 0){
+        if(result.size() > 0){
             StringBuilder tekst = new StringBuilder(BODY + personDTO.toString() + "\n\nDeze gegevens zouden kunnen overeenkomen met volgende patiënt(en) : \n");
             for(PersonDTO personDTO1 : result){
                 tekst.append(personDTO1.toString()).append("\n");
             }
             tekst.append("\nMet vriendelijke groeten \nMichiel Mortier");
             sendSimpleMessage(EMAIL,HEADER, tekst.toString());
-        }*/
+        }
         return result.size() > 0;
     }
 
@@ -96,6 +96,8 @@ public class WebRestFacade {
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);
+        System.out.println("MESSAGE IS KLAAR GEZET NU VERZENDEN");
         emailSender.send(message);
+        System.out.println("MESSAGE IS VERZONDEN");
     }
 }
