@@ -65,6 +65,7 @@ public class WebRestFacade {
     }
 
     public boolean calculate(PersonDTO personDTO) {
+        System.out.print("DIT ZIJN DE PERSONEN");
         System.out.println(personDTOS);
         personDTO.setBmi(personDTO.getWeight() / (personDTO.getLength() * personDTO.getLength()));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
