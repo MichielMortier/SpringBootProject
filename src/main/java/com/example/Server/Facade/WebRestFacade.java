@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.time.LocalDate;
@@ -59,12 +60,13 @@ public class WebRestFacade {
             CsvSchema bootstrapSchema = CsvSchema.emptySchema().withHeader().withColumnSeparator(';');
             char c = bootstrapSchema.getColumnSeparator();
             CsvMapper mapper = new CsvMapper();
-            new ClassPathResource(fileName).getInputStream();
-            /*MappingIterator<T> readValues =
+            InputStream file = new ClassPathResource(fileName).getInputStream();
+            MappingIterator<T> readValues =
                     mapper.reader(type).with(bootstrapSchema).readValues(file);
-            List<T> lijst = readValues.readAll();*/
             System.out.println("geen fout opgetreden");
-            return Collections.emptyList();//lijst;
+            List<T> lijst = readValues.readAll();
+            System.out.println("geen fout opgetreden");
+            return lijst;
         } catch (Exception e) {
             System.out.println("fout opgetreden!");
             StringWriter sw = new StringWriter();
