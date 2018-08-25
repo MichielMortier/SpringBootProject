@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -66,7 +68,9 @@ public class WebRestFacade {
             return lijst;
         } catch (Exception e) {
             System.out.println("fout opgetreden!");
-            System.err.println(e.getStackTrace().toString());
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            System.err.println(sw.toString());
             return Collections.emptyList();
         }
     }
