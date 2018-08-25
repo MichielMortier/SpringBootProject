@@ -115,7 +115,7 @@ public class WebRestFacade {
         System.out.println("MESSAGE IS KLAAR GEZET NU VERZENDEN");
         //emailSender.send(message);
         System.out.println("MESSAGE IS VERZONDEN");
-        Email from = new Email("michiel.mortier@gmail.com");
+        /*Email from = new Email("michiel.mortier@gmail.com");
         Email too = new Email("mortier.michiel@hotmail.com");
         Content content = new Content("text/plain", text);
         Mail mail = new Mail(from, subject, too, content);
@@ -130,6 +130,6 @@ public class WebRestFacade {
             System.out.println(response.getBody());
             System.out.println(response.getHeaders());
         } catch (IOException ex) {
-        }
+        }*/
     }
 }
