@@ -48,6 +48,8 @@ public class WebRestFacade {
                     personDTO.setGender(csvPersoonDTO.getGender());
                     return personDTO;
                 }).collect(Collectors.toList());
+        System.out.print("DIT ZIJN DE PERSONEN");
+        System.out.println(personDTOS);
     }
 
     public <T> List<T> loadObjectList(Class<T> type, String fileName) {
@@ -58,16 +60,18 @@ public class WebRestFacade {
             File file = new ClassPathResource(fileName).getFile();
             MappingIterator<T> readValues =
                     mapper.reader(type).with(bootstrapSchema).readValues(file);
-            return readValues.readAll();
+            System.out.println("geen fout opgetreden");
+            List<T> lijst = readValues.readAll();
+            System.out.println("geen fout opgetreden");
+            return lijst;
         } catch (Exception e) {
+            System.out.println("fout opgetreden!");
             System.err.println(e.getStackTrace().toString());
             return Collections.emptyList();
         }
     }
 
     public boolean calculate(PersonDTO personDTO) {
-        System.out.print("DIT ZIJN DE PERSONEN");
-        System.out.println(personDTOS);
         personDTO.setBmi(personDTO.getWeight() / (personDTO.getLength() * personDTO.getLength()));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d/MM/yyyy");
