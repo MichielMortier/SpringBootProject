@@ -26,7 +26,7 @@ public class ServerApplication {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 		mailSender.setHost(env.getProperty("spring.mail.host"));
 		mailSender.setPort(Integer.parseInt(Objects.requireNonNull(env.getProperty("spring.mail.port"))));
-
+        System.out.print("******USERNAME IS : " +System.getenv("username") + "EN PASSWORD IS :"  + System.getenv("password"));
 		mailSender.setUsername(env.getProperty(System.getenv("username")));
 		mailSender.setPassword(env.getProperty(System.getenv("password")));
 
