@@ -130,6 +130,9 @@ public class WebRestFacade {
             System.out.println(response.getBody());
             System.out.println(response.getHeaders());
         } catch (IOException ex) {
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            System.out.println("********** FOUT"+sw.toString());
         }
     }
 }
