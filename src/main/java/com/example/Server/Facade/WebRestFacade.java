@@ -65,6 +65,7 @@ public class WebRestFacade {
     }
 
     public boolean calculate(PersonDTO personDTO) {
+        System.out.println(personDTOS);
         personDTO.setBmi(personDTO.getWeight() / (personDTO.getLength() * personDTO.getLength()));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d/MM/yyyy");
