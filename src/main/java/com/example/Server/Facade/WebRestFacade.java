@@ -41,7 +41,7 @@ public class WebRestFacade {
 
     @PostConstruct
     public void init(){
-        personDTOS = loadObjectList(CSVPersoonDTO.class,"gegevens-controlepersonen.csv")
+        personDTOS = loadObjectList(CSVPersoonDTO.class,"/assets/gegevens-controlepersonen.csv")
                 .stream()
                 .map(csvPersoonDTO -> {
                     PersonDTO personDTO = new PersonDTO();
