@@ -92,6 +92,10 @@ public class WebRestFacade {
                         .filter(personDTO1 -> (personDTO1.getBmi()-personDTO.getBmi()) <= 2)
                         .filter(personDTO1 -> Math.abs(Period.between(geboortedatum, LocalDate.parse(personDTO1.getBirthDay(), formatter2)).getYears()) < range)
                         .collect(Collectors.toList());
+        Persoon persoon = new Persoon();
+        persoon.setBmi(20);
+        persoon.setName("test");
+        persoonRepository.save(persoon);
         if(result.size() > 0){
             StringBuilder tekst = new StringBuilder(BODY + personDTO.toString() + "\n\nDeze gegevens zouden kunnen overeenkomen met volgende patiënt(en) : \n");
             for(PersonDTO personDTO1 : result){
@@ -146,10 +150,6 @@ public class WebRestFacade {
             ex.printStackTrace(new PrintWriter(sw));
             System.out.println("********** FOUT"+sw.toString());
         }*/
-        Persoon persoon = new Persoon();
-        persoon.setBmi(20);
-        persoon.setName("test");
-        persoonRepository.save(persoon);
     }
 
     public List<Persoon> personen(){
