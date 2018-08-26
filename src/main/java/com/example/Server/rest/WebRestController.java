@@ -1,13 +1,11 @@
 package com.example.Server.rest;
 
 import com.example.Server.Facade.WebRestFacade;
-import com.example.Server.Models.Persoon;
 import com.example.Server.dto.PersonDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.util.List;
 
 /**
  * Created by Michiel
