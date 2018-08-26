@@ -8,6 +8,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -21,15 +23,15 @@ public class ServerApplication {
 		SpringApplication.run(ServerApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	public JavaMailSender getJavaMailSender() {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         System.out.print("****** SPRING MAIL HOST IS " + env.getProperty("spring.mail.host"));
         mailSender.setHost(env.getProperty("spring.mail.host"));
 		mailSender.setPort(Integer.parseInt(Objects.requireNonNull(env.getProperty("spring.mail.port"))));
         System.out.print("******USERNAME IS : " +System.getenv("username") + "EN PASSWORD IS :"  + System.getenv("password"));
-		/*mailSender.setUsername(env.getProperty(System.getenv("username")));
-		mailSender.setPassword(env.getProperty(System.getenv("password")));*/
+		mailSender.setUsername(env.getProperty(System.getenv("username")));
+		mailSender.setPassword(env.getProperty(System.getenv("password")));
 
 		Properties props = mailSender.getJavaMailProperties();
 		props.put("mail.transport.protocol", "smtp");
@@ -38,9 +40,9 @@ public class ServerApplication {
 		props.put("mail.debug", "true");
 
 		return mailSender;
-	}
+	}*/
 
-	@Bean
+	/*@Bean
 	public BasicDataSource dataSource() throws URISyntaxException {
 		URI dbUri = new URI(System.getenv("DATABASE_URL"));
 
@@ -54,5 +56,5 @@ public class ServerApplication {
 		basicDataSource.setPassword(password);
 
 		return basicDataSource;
-	}
+	}*/
 }
