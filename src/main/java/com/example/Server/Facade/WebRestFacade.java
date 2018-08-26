@@ -1,5 +1,7 @@
 package com.example.Server.Facade;
 
+import com.example.Server.Models.Persoon;
+import com.example.Server.Repository.PersoonRepository;
 import com.example.Server.dto.CSVPersoonDTO;
 import com.example.Server.dto.PersonDTO;
 import com.fasterxml.jackson.databind.MappingIterator;
@@ -12,6 +14,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMailMessage;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -36,11 +39,19 @@ public class WebRestFacade {
     @Autowired
     public JavaMailSender emailSender;
 
+    private final PersoonRepository persoonRepository;
+
     private final String HEADER="Er heeft zich een nieuwe testpersoon aangemeld!";
     private final String BODY="Beste Lotte Greet Mark Vercauteren\n\nEr heeft zich een nieuwe contact persoon aangemeld met volgende gegevens: \n\n";
     private final String EMAIL="michiel.mortier@gmail.com";
 
     public WebRestFacade(){}
+
+    @Autowired
+    public WebRestFacade(PersoonRepository persoonRepository){
+        this.persoonRepository = persoonRepository;
+    }
+
 
     @PostConstruct
     public void init(){
@@ -112,7 +123,7 @@ public class WebRestFacade {
         /*message.setTo(to);
         message.setSubject(subject);
         message.setText(text);*/
-        System.out.println("MESSAGE IS KLAAR GEZET NU VERZENDEN");
+        /*System.out.println("MESSAGE IS KLAAR GEZET NU VERZENDEN");
         //emailSender.send(message);
         System.out.println("MESSAGE IS VERZONDEN");
         System.out.println("KEY " + System.getenv("API_KEY"));
@@ -134,6 +145,10 @@ public class WebRestFacade {
             StringWriter sw = new StringWriter();
             ex.printStackTrace(new PrintWriter(sw));
             System.out.println("********** FOUT"+sw.toString());
-        }
+        }*/
+        Persoon persoon = new Persoon();
+        persoon.setBmi(20);
+        persoon.setName("test");
+        persoonRepository.save(persoon);
     }
 }
