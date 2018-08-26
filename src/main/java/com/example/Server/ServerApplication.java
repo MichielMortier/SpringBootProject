@@ -25,25 +25,6 @@ public class ServerApplication {
 	}
 
 	@Bean
-	public JavaMailSender getJavaMailSender() {
-		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        System.out.print("****** SPRING MAIL HOST IS " + env.getProperty("spring.mail.host"));
-        mailSender.setHost(env.getProperty("spring.mail.host"));
-		mailSender.setPort(Integer.parseInt(Objects.requireNonNull(env.getProperty("spring.mail.port"))));
-        System.out.print("******USERNAME IS : " +System.getenv("username") + "EN PASSWORD IS :"  + System.getenv("password"));
-		mailSender.setUsername(env.getProperty(System.getenv("username")));
-		mailSender.setPassword(env.getProperty(System.getenv("password")));
-
-		Properties props = mailSender.getJavaMailProperties();
-		props.put("mail.transport.protocol", "smtp");
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.debug", "true");
-
-		return mailSender;
-	}
-
-	@Bean
 	public BasicDataSource dataSource() throws URISyntaxException {
 		URI dbUri = new URI(System.getenv("DATABASE_URL"));
 

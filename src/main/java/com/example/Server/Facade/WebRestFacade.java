@@ -4,6 +4,7 @@ import com.example.Server.Models.Persoon;
 import com.example.Server.Repository.PersoonRepository;
 import com.example.Server.dto.CSVPersoonDTO;
 import com.example.Server.dto.PersonDTO;
+import com.example.Server.mapper.BaseMapper;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
@@ -18,8 +19,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.Period;
@@ -36,16 +35,7 @@ public class WebRestFacade {
 
     private List<PersonDTO> personDTOS;
 
-    @Autowired
-    public JavaMailSender emailSender;
-
     private final PersoonRepository persoonRepository;
-
-    private final String HEADER="Er heeft zich een nieuwe testpersoon aangemeld!";
-    private final String BODY="Beste Lotte Greet Mark Vercauteren\n\nEr heeft zich een nieuwe contact persoon aangemeld met volgende gegevens: \n\n";
-    private final String EMAIL="michiel.mortier@gmail.com";
-
-    //public WebRestFacade(){}
 
     @Autowired
     public WebRestFacade(PersoonRepository persoonRepository){
@@ -92,64 +82,10 @@ public class WebRestFacade {
                         .filter(personDTO1 -> (personDTO1.getBmi()-personDTO.getBmi()) <= 2)
                         .filter(personDTO1 -> Math.abs(Period.between(geboortedatum, LocalDate.parse(personDTO1.getBirthDay(), formatter2)).getYears()) < range)
                         .collect(Collectors.toList());
-        Persoon persoon = new Persoon();
-        persoon.setBmi(20);
-        persoon.setName("test");
-        persoonRepository.save(persoon);
         if(result.size() > 0){
-            StringBuilder tekst = new StringBuilder(BODY + personDTO.toString() + "\n\nDeze gegevens zouden kunnen overeenkomen met volgende patiënt(en) : \n");
-            for(PersonDTO personDTO1 : result){
-                tekst.append(personDTO1.toString()).append("\n");
-            }
-            tekst.append("\nMet vriendelijke groeten \nMichiel Mortier");
-            sendSimpleMessage(EMAIL,HEADER, tekst.toString());
+            persoonRepository.save(BaseMapper.map(personDTO,Persoon.class));
         }
         return result.size() > 0;
-    }
-
-    private void sendSimpleMessage(
-            String to, String subject, String text) {
-        //SimpleMailMessage message = new SimpleMailMessage();
-        /*MimeMessage mimeMessage = emailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
-        try {
-            helper.setTo(to);
-            helper.setText(text);
-            helper.setSubject(subject);
-            emailSender.send(mimeMessage);
-        } catch (MessagingException e) {
-            StringWriter sw = new StringWriter();
-            e.printStackTrace(new PrintWriter(sw));
-            System.out.println("********** FOUT"+sw.toString());
-
-        }
-
-        /*message.setTo(to);
-        message.setSubject(subject);
-        message.setText(text);*/
-        /*System.out.println("MESSAGE IS KLAAR GEZET NU VERZENDEN");
-        //emailSender.send(message);
-        System.out.println("MESSAGE IS VERZONDEN");
-        System.out.println("KEY " + System.getenv("API_KEY"));
-        Email from = new Email("michiel.mortier@gmail.com");
-        Email too = new Email("mortier.michiel@hotmail.com");
-        Content content = new Content("text/plain", text);
-        Mail mail = new Mail(from, subject, too, content);
-        SendGrid sg = new SendGrid(System.getenv("API_KEY"));
-        Request request = new Request();
-        try {
-            request.setMethod(Method.POST);
-            request.setEndpoint("mail/send");
-            request.setBody(mail.build());
-            Response response = sg.api(request);
-            System.out.println(response.getStatusCode());
-            System.out.println(response.getBody());
-            System.out.println(response.getHeaders());
-        } catch (IOException ex) {
-            StringWriter sw = new StringWriter();
-            ex.printStackTrace(new PrintWriter(sw));
-            System.out.println("********** FOUT"+sw.toString());
-        }*/
     }
 
     public String personen(){
