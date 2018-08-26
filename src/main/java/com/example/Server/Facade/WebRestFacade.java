@@ -91,4 +91,8 @@ public class WebRestFacade {
         }
         return out.toString();
     }
+
+    public void delete(){
+        persoonRepository.deleteAll();
+    }
 }

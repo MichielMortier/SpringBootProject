@@ -3,6 +3,7 @@ package com.example.Server.rest;
 import com.example.Server.Facade.WebRestFacade;
 import com.example.Server.dto.PersonDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -30,5 +31,11 @@ public class WebRestController {
     @GetMapping(value="/seeDatabaseContent")
     public String seeContent() {
         return webRestFacade.personen();
+    }
+
+    @GetMapping(value="/deleteDBInfoNow")
+    public HttpStatus deleteEver() {
+        webRestFacade.delete();
+        return HttpStatus.OK;
     }
 }
