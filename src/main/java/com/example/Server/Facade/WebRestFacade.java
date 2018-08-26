@@ -151,4 +151,8 @@ public class WebRestFacade {
         persoon.setName("test");
         persoonRepository.save(persoon);
     }
+
+    public List<Persoon> personen(){
+        return persoonRepository.findAll();
+    }
 }
