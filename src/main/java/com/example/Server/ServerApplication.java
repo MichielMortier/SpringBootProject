@@ -1,5 +1,6 @@
 package com.example.Server;
 
+import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -42,7 +43,7 @@ public class ServerApplication {
 		return mailSender;
 	}*/
 
-	/*@Bean
+	@Bean
 	public BasicDataSource dataSource() throws URISyntaxException {
 		URI dbUri = new URI(System.getenv("DATABASE_URL"));
 
@@ -56,5 +57,5 @@ public class ServerApplication {
 		basicDataSource.setPassword(password);
 
 		return basicDataSource;
-	}*/
+	}
 }

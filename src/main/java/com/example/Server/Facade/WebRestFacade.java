@@ -45,7 +45,7 @@ public class WebRestFacade {
     private final String BODY="Beste Lotte Greet Mark Vercauteren\n\nEr heeft zich een nieuwe contact persoon aangemeld met volgende gegevens: \n\n";
     private final String EMAIL="michiel.mortier@gmail.com";
 
-    public WebRestFacade(){}
+    //public WebRestFacade(){}
 
     @Autowired
     public WebRestFacade(PersoonRepository persoonRepository){
