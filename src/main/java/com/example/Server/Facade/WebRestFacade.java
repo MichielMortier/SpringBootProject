@@ -152,7 +152,11 @@ public class WebRestFacade {
         }*/
     }
 
-    public List<Persoon> personen(){
-        return persoonRepository.findAll();
+    public String personen(){
+        StringBuilder out = new StringBuilder();
+        for(Persoon persoon :persoonRepository.findAll()){
+            out.append(persoon.toString()).append("<br><hr>");
+        }
+        return out.toString();
     }
 }

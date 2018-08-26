@@ -43,4 +43,19 @@ public class Persoon {
     private double length;
 
     private double bmi;
+
+    public String toString(){
+        String out = "";
+        if(name != null){
+            out += "Naam : " + name;
+            out += "<br>Voornaam : " + preName;
+            out += "<br>Email : " + email;
+            out += "<br>Gewicht : " + weight;
+            out += "<br>Lengte : " + length;
+        }
+        out += "<br>BMI : " +  Math.round(bmi * 100.0) / 100.0;
+        out += "<br>Geslacht : " + gender;
+        out += "<br>Geboortedatum : " + birthDay;
+        return out;
+    }
 }

@@ -30,7 +30,7 @@ public class WebRestController {
     }
 
     @GetMapping(value="/seeDatabaseContent")
-    public List<Persoon> seeContent() {
+    public String seeContent() {
         return webRestFacade.personen();
     }
 }
