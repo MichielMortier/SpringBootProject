@@ -77,7 +77,9 @@ public class WebRestFacade {
                         .filter(personDTO1 -> Math.abs(Period.between(geboortedatum, LocalDate.parse(personDTO1.getBirthDay(), formatter2)).getYears()) < range)
                         .collect(Collectors.toList());
         if(result.size() > 0){
-            persoonRepository.save(BaseMapper.map(personDTO,Persoon.class));
+           Persoon persoon = BaseMapper.map(personDTO,Persoon.class);
+           persoon.setId(-1L);
+            persoonRepository.save(persoon);
         }
         return result.size() > 0;
     }
