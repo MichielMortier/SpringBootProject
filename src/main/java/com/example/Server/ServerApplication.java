@@ -24,7 +24,7 @@ public class ServerApplication {
 		SpringApplication.run(ServerApplication.class, args);
 	}
 
-	/*@Bean
+	@Bean
 	public JavaMailSender getJavaMailSender() {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         System.out.print("****** SPRING MAIL HOST IS " + env.getProperty("spring.mail.host"));
@@ -41,7 +41,7 @@ public class ServerApplication {
 		props.put("mail.debug", "true");
 
 		return mailSender;
-	}*/
+	}
 
 	@Bean
 	public BasicDataSource dataSource() throws URISyntaxException {
