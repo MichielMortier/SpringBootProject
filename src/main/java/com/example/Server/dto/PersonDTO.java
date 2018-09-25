@@ -22,6 +22,8 @@ public class PersonDTO {
 
     private String gender;
 
+    private String phoneNumber;
+
     private double weight;
 
     private double length;

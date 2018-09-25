@@ -38,6 +38,8 @@ public class Persoon {
 
     private String gender;
 
+    private String phoneNumber;
+
     private double weight;
 
     private double length;
@@ -52,6 +54,7 @@ public class Persoon {
             out += "<br>Email : " + email;
             out += "<br>Gewicht : " + weight;
             out += "<br>Lengte : " + length;
+            out += "<br>Telefooon : " + phoneNumber;
         }
         out += "<br>BMI : " +  Math.round(bmi * 100.0) / 100.0;
         out += "<br>Geslacht : " + gender;
