@@ -72,7 +72,7 @@ public class WebRestFacade {
         List<PersonDTO> result = personDTOS
                 .stream()
                 .filter(personDTO1 -> personDTO1.getGender().equals(personDTO.getGender()))
-                .filter(personDTO1 -> (personDTO1.getBmi() - personDTO.getBmi()) <= 2)
+                .filter(personDTO1 -> Math.abs(personDTO1.getBmi() - personDTO.getBmi()) <= 2)
                 .filter(personDTO1 -> Math.abs(Period.between(geboortedatum, LocalDate.parse(personDTO1.getBirthDay(), formatter2)).getYears()) < range)
                 .collect(Collectors.toList());
         if (result.size() > 0) {
